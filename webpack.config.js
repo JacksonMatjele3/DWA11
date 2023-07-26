@@ -1,14 +1,22 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    main: "./src/index.js",
+    vendor: "./src/vendor.js",
+  },
   output: {
-    filename: "app.js",
-    path: path.resolve(__dirname, "dist")
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 9000
+    port: 8080,
   },
-  mode: "development"
+  mode: "production",
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
 };
